@@ -27,7 +27,7 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button pesquisar;
+    Button pesquisar, ligar, desligar;
     ListView listaDispositivos;
 
     ArrayList<String> dispositivos = new ArrayList<String>();
@@ -70,12 +70,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pesquisar = (Button) findViewById(R.id.pesquisar);
+        pesquisar = (Button) findViewById(R.id.btnPesquisar);
         pesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 descobrirDispositivos();
                 adaptador.startDiscovery();
+            }
+        });
+
+        ligar = (Button) findViewById(R.id.btnLigar);
+        ligar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    out.write("A".getBytes());
+                    out.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        desligar = (Button) findViewById(R.id.btnDesligar);
+        desligar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    out.write("B".getBytes());
+                    out.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
